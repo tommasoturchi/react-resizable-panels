@@ -1,17 +1,14 @@
-import useUniqueId from "./hooks/useUniqueId";
 import {
-  createElement,
   CSSProperties,
   HTMLAttributes,
   PropsWithChildren,
   ReactElement,
+  createElement,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "./vendor/react";
-
-import { useWindowSplitterResizeHandlerBehavior } from "./hooks/useWindowSplitterBehavior";
 import {
   PanelGroupContext,
   ResizeEvent,
@@ -19,11 +16,14 @@ import {
 } from "./PanelGroupContext";
 import {
   PointerHitAreaMargins,
-  registerResizeHandle,
   ResizeHandlerAction,
+  registerResizeHandle,
 } from "./PanelResizeHandleRegistry";
+
 import { assert } from "./utils/assert";
 import useIsomorphicLayoutEffect from "./hooks/useIsomorphicEffect";
+import useUniqueId from "./hooks/useUniqueId";
+import { useWindowSplitterResizeHandlerBehavior } from "./hooks/useWindowSplitterBehavior";
 
 export type PanelResizeHandleOnDragging = (isDragging: boolean) => void;
 export type ResizeHandlerState = "drag" | "hover" | "inactive";
@@ -169,9 +169,9 @@ export function PanelResizeHandle({
       direction,
       {
         // Coarse inputs (e.g. finger/touch)
-        coarse: hitAreaMargins?.coarse ?? 15,
+        coarse: hitAreaMargins?.coarse ?? [15, 15, 15, 15],
         // Fine inputs (e.g. mouse)
-        fine: hitAreaMargins?.fine ?? 5,
+        fine: hitAreaMargins?.fine ?? [5, 5, 5, 5],
       },
       setResizeHandlerState
     );

@@ -1,9 +1,10 @@
 import { Direction, ResizeEvent } from "./types";
 import { resetGlobalCursorStyle, setGlobalCursorStyle } from "./utils/cursor";
-import { getResizeEventCoordinates } from "./utils/events/getResizeEventCoordinates";
-import { getInputType } from "./utils/getInputType";
-import { intersects } from "./utils/rects/intersects";
+
 import { compare } from "./vendor/stacking-order";
+import { getInputType } from "./utils/getInputType";
+import { getResizeEventCoordinates } from "./utils/events/getResizeEventCoordinates";
+import { intersects } from "./utils/rects/intersects";
 
 export type ResizeHandlerAction = "down" | "move" | "up";
 export type SetResizeHandlerState = (
@@ -13,8 +14,8 @@ export type SetResizeHandlerState = (
 ) => void;
 
 export type PointerHitAreaMargins = {
-  coarse: number;
-  fine: number;
+  coarse: number[];
+  fine: number[];
 };
 
 export type ResizeHandlerData = {
@@ -159,10 +160,10 @@ function recalculateIntersectingHandles({
       : hitAreaMargins.fine;
 
     const eventIntersects =
-      x >= left - margin &&
-      x <= right + margin &&
-      y >= top - margin &&
-      y <= bottom + margin;
+      x >= left - (margin[0] ?? 0) &&
+      x <= right + (margin[1] ?? 0) &&
+      y >= top - (margin[2] ?? 0) &&
+      y <= bottom + (margin[3] ?? 0);
 
     if (eventIntersects) {
       // TRICKY
