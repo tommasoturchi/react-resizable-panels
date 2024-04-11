@@ -89,7 +89,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 | :--------------- | :-------------------------------------------- | :------------------------------------------------------------------------------ |
 | `children`       | `?ReactNode`                                  | Custom drag UI; can be any arbitrary React element(s)                           |
 | `className`      | `?string`                                     | Class name to attach to root element                                            |
-| `hitAreaMargins` | `?{ coarse: number = 15; fine: number = 5; }` | Allow this much margin when determining resizable handle hit detection          |
+| `hitAreaMargins` | `?{ coarse: number[]; fine: number[]; }`      | Allow this much margin when determining resizable handle hit detection          |
 | `disabled`       | `?boolean`                                    | Disable drag handle                                                             |
 | `id`             | `?string`                                     | Resize handle id (unique within group); falls back to `useId` when not provided |
 | `onDragging`     | `?(isDragging: boolean) => void`              | Called when group layout changes                                                |
